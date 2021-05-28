@@ -19,7 +19,7 @@ async function main() {
 	const bitcoinRate = ("₿ = $" + lastPrice).green;
 	const chart = asciichart.plot(series, {height: 25, padding: "            "});
 	log.yellow("\n" + chart, bitcoinRate, "\n");
-	var twoDayBullishInput = {
+	var fiveLastCandles = {
 		open: [
 			ohlcv[ohlcv.length - 6][1],
 			ohlcv[ohlcv.length - 5][1],
@@ -49,8 +49,17 @@ async function main() {
 			ohlcv[ohlcv.length - 2][3]
 		]
 	};
-	console.log("Bullish", bullish(twoDayBullishInput));
-	console.log("Bearish", bearish(twoDayBullishInput));
+
+	log.yellow(
+		"\nBullish candles patterns found ? " +
+			(bullish(fiveLastCandles) ? "Yes" : "No") +
+			"\n"
+	);
+	log.yellow(
+		"Bearish candles patterns found  ? " +
+			(bearish(fiveLastCandles) ? "Yes" : "No") +
+			"\n"
+	);
 	return true;
 }
 
